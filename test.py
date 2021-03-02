@@ -13,9 +13,10 @@ db.create_all()
 class UserTests(TestCase):
 
     def setUp(self):
+        db.drop_all()
+        db.create_all()
+        
         """Add sample user """
-
-        User.query.delete()
 
         user = User(first_name="Test", last_name="Test")
         db.session.add(user)
