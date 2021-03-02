@@ -1,6 +1,6 @@
 from unittest import TestCase
 from app import app
-from models import db, User 
+from models import db, User, Post 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_test'
 app.config['SQLALCHEMY_ECHO'] = False
@@ -19,6 +19,14 @@ class UserTests(TestCase):
         user = User(first_name="Test", last_name="Test")
         db.session.add(user)
         db.session.commit()
+        self.user_id = user.id 
+
+        """ Add sample post """
+
+        post = Post(title="Test title", content="Test content")
+        db.session.add(post)
+        db.session.commit()
+        self.post_id = post.id 
         self.user_id = user.id 
 
     def tearDown(self):
@@ -63,6 +71,26 @@ class UserTests(TestCase):
             self.assertIn("John Smith", html)
 
     
+    """ post test cases """
 
+    # def test_new_post_form(self):
+    #     """ Test that the add new post page displays correctly """
+
+    #     with app.test_client() as client:
+    #         response = client.get(f'/users/{user_id}/posts/new')
+    #         html = response.get_data(as_text=True)
+
+    #         self.assertEqual(response.status_code, 200)
+    #         self.assertIn('Add Post', html)
 
     
+    # def test_add_post(self):
+    #     """ Test the form submission for adding a new post """
+
+    #     with app.test.client() as client: 
+    #         d = {"title": "Test Title", "content": "Test content", "user_id": f"{user_id}"}
+    #         response = client.post(f"/users/{user_id}/posts/new", data=d, follow_redirects=True)
+    #         html = response.get_data(as_text=True)
+
+    #         self.assertEqual(response.status_code, 200)
+    #         self.assertIn("Test Title", html) 

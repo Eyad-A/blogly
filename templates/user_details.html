@@ -17,5 +17,19 @@
         </button>
     </form>
 </div>
+
+<div>
+    <ul>
+        {% for post in user.posts %}
+        <li>
+            <a href="/posts/{{ post.id }}">{{ post.title }}</a>
+            <small>{{ post.created_at }}</small>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <a href="/users/{{ user.id }}/posts/new"><button>Add Post</button></a>
+</div>
  
 {% endblock %}
