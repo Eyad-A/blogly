@@ -21,14 +21,6 @@ class UserTests(TestCase):
         db.session.commit()
         self.user_id = user.id 
 
-        """ Add sample post """
-
-        post = Post(title="Test title", content="Test content")
-        db.session.add(post)
-        db.session.commit()
-        self.post_id = post.id 
-        self.user_id = user.id 
-
     def tearDown(self):
         """ Clean up after testing """
         
