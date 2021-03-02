@@ -24,7 +24,7 @@ class User(db.Model):
     last_name = db.Column(db.Text, nullable=False)
     image_url = db.Column(db.Text, nullable=False, default=DEFAULT_IMAGE_URL)
 
-    posts = db.relationship("Post", backref="user")
+    posts = db.relationship("Post", backref="user", cascade="all, delete-orphan")
 
     
 class Post(db.Model):

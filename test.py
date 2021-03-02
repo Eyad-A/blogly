@@ -1,6 +1,7 @@
 from unittest import TestCase
 from app import app
 from models import db, User, Post 
+import pdb
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_test'
 app.config['SQLALCHEMY_ECHO'] = False
@@ -65,24 +66,24 @@ class UserTests(TestCase):
     
     """ post test cases """
 
-    # def test_new_post_form(self):
-    #     """ Test that the add new post page displays correctly """
+    def test_new_post_form(self):
+        """ Test that the add new post page displays correctly """
 
-    #     with app.test_client() as client:
-    #         response = client.get(f'/users/{user_id}/posts/new')
-    #         html = response.get_data(as_text=True)
+        with app.test_client() as client:
+            response = client.get(f'/users/{self.user_id}/posts/new')
+            html = response.get_data(as_text=True)
 
-    #         self.assertEqual(response.status_code, 200)
-    #         self.assertIn('Add Post', html)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('Add Post', html)
 
     
-    # def test_add_post(self):
-    #     """ Test the form submission for adding a new post """
+    def test_add_post(self):
+        """ Test the form submission for adding a new post """
 
-    #     with app.test.client() as client: 
-    #         d = {"title": "Test Title", "content": "Test content", "user_id": f"{user_id}"}
-    #         response = client.post(f"/users/{user_id}/posts/new", data=d, follow_redirects=True)
-    #         html = response.get_data(as_text=True)
+        with app.test_client() as client: 
+            d = {"title": "Test Title", "content": "Test content", "user_id": f"{self.user_id}"}
+            response = client.post(f"/users/{self.user_id}/posts/new", data=d, follow_redirects=True)
+            html = response.get_data(as_text=True)
 
-    #         self.assertEqual(response.status_code, 200)
-    #         self.assertIn("Test Title", html) 
+            self.assertEqual(response.status_code, 200)
+            self.assertIn("Test Title", html) 
