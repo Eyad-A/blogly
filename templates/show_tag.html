@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<h2>{{ tag.name }}</h2>
+<h1>{{ tag.name }}</h1>
 
 <ul>
     {% for post in tag.posts %}
@@ -13,8 +13,8 @@
 </ul>
 
 <form>
-    <button formmethod="GET" formaction="/tags/{{ tag.id }}/edit">Edit</button>
-    <button formmethod="POST" formaction="/tags/{{ tag.id }}/delete">Delete</button>
+    <button class="btn btn-warning" formmethod="GET" formaction="/tags/{{ tag.id }}/edit">Edit</button>
+    <button class="btn btn-danger" formmethod="POST" formaction="/tags/{{ tag.id }}/delete">Delete</button>
 </form>
 
 {% endblock %}

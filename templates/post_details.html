@@ -1,15 +1,12 @@
 {% extends 'base.html' %}
 
-{%block title %} Post Details {% endblock %}
+{%block title %} {{ post.title }} {% endblock %}
 
 {% block content %} 
 
 <div>
-    <h2>{{ post.title }} </h2>
-</div>
-
-<div>
-    {{ post.content }}
+    <h1>{{ post.title }} </h1>
+    
 </div>
 
 <div>
@@ -20,21 +17,28 @@
     On {{ post.created_at }}
 </div>
 
-{% if post.tags %}
-<p>
-    <b>Tags:</b>
-    {% for tag in post.tags %}
-    <a href="/tags/{{tag.id }}"><i class="badge badge-primary">{{ tag.name }}</i></a>
-    {% endfor %}
-</p>
-{% endif %}
+<div>
+    {% if post.tags %}
+    <p>
+        <b>Tags:</b>
+        {% for tag in post.tags %}
+        <a href="/tags/{{ tag.id }}"><i class="badge badge-primary">{{ tag.name }}</i></a>
+        {% endfor %}
+    </p>
+    {% endif %}
+</div>
+
+<div>
+    {{ post.content }}
+</div>
+
 
 <div>
     <form>
-        <button formaction="/posts/{{ post.id }}/edit" formmethod="GET">
+        <button class="btn btn-warning" formaction="/posts/{{ post.id }}/edit" formmethod="GET">
             Edit
         </button>
-        <button formaction="/posts/{{ post.id }}/delete" formmethod="POST">
+        <button class="btn btn-danger" formaction="/posts/{{ post.id }}/delete" formmethod="POST">
             Delete
         </button>
     </form>

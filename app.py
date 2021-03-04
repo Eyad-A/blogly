@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect, render_template
+from flask import Flask, request, redirect, render_template, flash 
 from models import db, connect_db, User, Post, Tag 
 
 app = Flask(__name__)
@@ -12,9 +12,10 @@ db.create_all()
 
 @app.route("/")
 def show_index():
-    """ redirect to /users for now """
+    """ Show recent blog posts """
 
-    return redirect('/users')
+    posts = Post.query.order_by(Post.created_at.desc()).limit(10).all()
+    return render_template('index.html', posts=posts)
 
 
 @app.route("/users")

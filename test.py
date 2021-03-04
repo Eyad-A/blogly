@@ -17,11 +17,11 @@ class UserTests(TestCase):
         db.create_all()
         
         """Add sample user """
-
         user = User(first_name="Test", last_name="Test")
         db.session.add(user)
         db.session.commit()
         self.user_id = user.id 
+
 
     def tearDown(self):
         """ Clean up after testing """
@@ -33,7 +33,9 @@ class UserTests(TestCase):
 
         with app.test_client() as client:
             response = client.get("/")
-            self.assertEqual(response.status_code, 302)
+            html = response.get_data(as_text=True)
+            self.assertEqual(response.status_code, 200)
+            self.assertIn('Blogly Recent Posts', html)
 
     def test_user_listing(self):
         """ check if the test user just created exists """
