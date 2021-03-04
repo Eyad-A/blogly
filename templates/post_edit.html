@@ -4,13 +4,20 @@
 
 {% block content %} 
 
-<h2>Edit a post</h2>
+<h1>Edit a post</h1>
 
 <form method="POST" action="/posts/{{ post.id }}/edit">
     <label for="title">Title</label> 
         <input type="text" name="title" value="{{ post.title }}">
     <label for="content">Content</label> 
         <textarea name="content">{{ post.content }}</textarea>
+    {% for tag in tags %}
+        <input type="checkbox" 
+               value="{{ tag.id }}"
+               {% if tag in post.tags %}checked{% endif %}
+               name="tags">
+        {{ tag.name }}
+    {% endfor %}
     <button type="submit">Save</button>
 </form>
 
